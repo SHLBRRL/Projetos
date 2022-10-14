@@ -1,4 +1,4 @@
-# Projetos
+# Projetos em Grupo
 
 [![Contributors][contributors-shield]][contributors-url]
 
