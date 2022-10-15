@@ -1,0 +1,66 @@
+V = {v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11}
+E = {e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15}
+Não há arestas paralelas pois não há mais de uma aresta ligando os mesmos 2 vértices
+Não, pois não há nenhum vértice de grau 0, ou seja, não há nenhum vértice que não é conectado por uma aresta
+N(v6) = {v5, v8, v9, v11}
+N(v9) = {v6, v8, v10, v11}
+Sim, pois não há arestas paralelas ou loops
+d(v1) = 2; d(v2) = 2; d(v3) = 3; d(v4) = 2;
+d(v5) = 3; d(v6) = 4; d(v7) = 2; d(v8) = 4;
+d(v9) = 4; d(v10) = 2; d(v11) = 2;
+2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4
+não, pois há vértices de graus diferentes
+sum(d(v[i])) = 2 * arestas
+75 = 2 * arestas
+arestas = 37.5
+este grafo não existe
+
+sum(d(v[i])) = 2 * arestas
+75 = 2 * arestas
+arestas = 37.5
+este grafo não existe
+
+sum(d(v[i])) = 2 * arestas
+30 = 2 * arestas
+arestas = 15
+pode haver este grafo
+
+A1 ∩ A2 = true
+A1 ∩ A3 = false
+A1 ∩ A4 = true
+A1 ∩ A5 = true
+A2 ∩ A3 = true
+A2 ∩ A4 = false
+A2 ∩ A5 = true
+A3 ∩ A4 = true
+A3 ∩ A5 = true 
+A4 ∩ A5 = true
+
+Não, pois uma das condições para dois grafos serem isomorfos é terem o mesmo número de vértices
+Não, pois uma das condições para dois grafos serem isomorfos é terem o mesmo número de arestas
+
+Apesar de G1 e G2 terem o mesmo número de vértices e arestas, G1 tem vértices de grau 3 e G2 não portanto não são isomorfos
+
+n*(n-1)/2
+7*(7-1)/2
+21
+
+n*(n-1)/2
+10*(10-1)/2
+45
+
+G é supegrafo de si mesmo
+
+G é subgrafo de si mesmo
+
+v1e1v2
+v1e1v2e1v1
+
+v1e1v2
+
+v2e2v3e4v2
+
+Não, pois para um grafo ser euleriano, todos seus vértices têm que ter grau par
+Sim, pois todos seus vértices são pares
+
+Um grafo simples com
