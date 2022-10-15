@@ -313,7 +313,13 @@ class CUP$Parser$actions {
 		int e2left = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Double e2 = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		 RESULT = e1 / e2; 
+		 
+                if (e2 != 0) { 
+                        RESULT = e1 / e2;
+                } else {
+                        throw new Exception("Erro: divisão por 0");
+                } 
+        
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -443,7 +449,7 @@ class CUP$Parser$actions {
 		 Double value = symbolTable.get(id); if (value != null) {
         RESULT = value;
         } else { 
-               throw new Exception("variavel " + id + " nao declarada!");
+               throw new Exception("variavel " + id + " não inicializada!");
         }
                
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
