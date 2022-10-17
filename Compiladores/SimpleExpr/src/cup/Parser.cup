@@ -1,0 +1,64 @@
+// Especificação do parser CUP
+package parser;
+import java_cup.runtime.*;
+import java.util.HashMap;
+
+parser code {:
+        private HashMap<String, Double> symbolTable = new HashMap<>();
+:}
+
+// Definição dos terminais
+terminal            SEMI, PLUS, MINUS, TIMES, DIVIDE, MOD;
+terminal            UMINUS, LPAREN, RPAREN, ASSIGN, SIN, COS, POWER;
+terminal Double     NUMBER, PI;
+terminal String     ID;
+// Definição dos não-terminais
+non terminal            expr_list, expr_part;
+non terminal Double     expr;
+// Precedência e associatividade dos operadores
+precedence nonassoc ASSIGN;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE, MOD;
+precedence right POWER;
+precedence left UMINUS;
+// Regras da gramática
+expr_list ::= expr_list expr_part
+    | expr_part
+    ;
+expr_part ::= expr:e {:
+        if(e != null){
+                System.out.println("Resultado: " + e);
+        } :} SEMI
+    | error SEMI
+    ;
+expr ::= expr:e1 PLUS expr:e2
+            {: RESULT = e1 + e2; :}
+    | expr:e1 MINUS expr:e2
+            {: RESULT = e1 - e2; :}
+    | expr:e1 TIMES expr:e2
+            {: RESULT = e1 * e2; :}
+    | expr:e1 DIVIDE expr:e2 {: 
+                if (e2 != 0) { 
+                        RESULT = e1 / e2;
+                } else {
+                        throw new Exception("Erro: divisão por 0");
+                } 
+        :}
+    | expr:e1 MOD expr:e2
+            {: RESULT = e1 % e2; :}
+    | NUMBER:n {: RESULT = n; :}
+    | MINUS expr:e {: RESULT = -e;
+                    :} %prec UMINUS
+    | LPAREN expr:e RPAREN {: RESULT = e; :}
+    | SIN expr:e RPAREN {: RESULT = Math.sin(e); :}
+    | COS expr:e RPAREN {: RESULT = Math.cos(e); :}
+    | PI {: RESULT = Math.PI; :}
+    | expr:e1 POWER expr:e2 {: RESULT = Math.pow(e1, e2); :}
+    | ID:id ASSIGN expr:e {: symbolTable.put(id, e); RESULT = e; :}
+    | ID:id  {: Double value = symbolTable.get(id); if (value != null) {
+        RESULT = value;
+        } else { 
+               throw new Exception("variavel " + id + " não inicializada!");
+        }
+               :}
+    ;
