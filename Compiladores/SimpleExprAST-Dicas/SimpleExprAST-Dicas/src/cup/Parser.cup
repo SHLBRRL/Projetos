@@ -1,0 +1,107 @@
+// Especificação do parser CUP
+package parser;
+import java_cup.runtime.*;
+import ast.AST;
+import ast.Number;
+import ast.Identifier;
+import ast.Operator;
+import interpreter.Interpreter;
+
+import transpiler.Transpiler;
+
+parser code {:
+    public void syntax_error(Symbol s) {
+        System.err.println("Erro de sintaxe. Token inesperado: " + sym.terminalNames[s.sym] +
+            ". Linha: " + (s.left + 1) + ", Coluna: " + (s.right + 1));
+    }
+
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
+        System.err.println("Erro sintático próximo ao símbolo: <" + sym.terminalNames[s.sym] +
+            ". Linha: " + (s.left + 1) + ", Coluna: " + (s.right + 1));
+    }
+:};
+
+// Definição dos terminais
+terminal            ERROR, SEMI, PLUS, MINUS, TIMES, DIVIDE, MOD;
+terminal            UMINUS, LPAREN, RPAREN, EXP, SIN, COS, ASSIGN;
+terminal            PRINT, READ;
+terminal Double     NUMBER;
+terminal Double     PI;
+terminal String     ID;
+
+// Definição dos não-terminais
+non terminal expr_list, expr_part;
+non terminal AST  expr, assign_expr, num_expr;
+non terminal AST input_expr, output_expr;
+
+// Precedência e associatividade dos operadores
+precedence nonassoc ASSIGN;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE, MOD;
+precedence right EXP;
+precedence left UMINUS;
+
+/*
+    Gramática:
+    <expr_list> ::= <expr_list> <expr_part> | <expr_part>
+    <expr_part> ::= <expr> ";"
+    <expr> ::= <assign_expr> | <num_expr> | <input_expr> | <output_expr>
+    <assign_expr> ::= id "=" <num_expr>
+    <num_expr> ::= <num_expr> "+" <num_expr> | <num_expr> "-" <num_expr>
+             | <num_expr> "*" <num_expr> | <num_expr> "/" <num_expr>
+             | <num_expr> "%" <num_expr> | "(" <num_expr> ")"
+             | <num_expr> "**" <num_expr>| "sin" "(" <num_expr> ")"
+             | "cos" "(" <num_expr> ")"  | "-" <num_expr> | number | id | PI
+    <input_expr> ::= "read" "(" id ")"
+    <output_expr> ::= "print" "(" expr ")"
+*/
+
+// Regras da gramática
+expr_list ::= expr_list expr_part
+    | expr_part
+    ;
+
+expr_part ::= expr:e {:
+            Transpiler.transpile(e);
+            System.out.println(
+                Transpiler.getStackProgram());
+            Transpiler.clearStackProgram();
+            //Interpreter.interpret(e);
+            //AST.printAST(e);
+        :} SEMI
+    | error SEMI
+    ;
+
+expr ::= assign_expr:e {: RESULT = e; :}
+    | num_expr:e {: RESULT = e; :}
+    | input_expr:e {: RESULT = e; :}
+    | output_expr:e {: RESULT = e; :}
+    ;
+
+assign_expr ::= ID:id ASSIGN num_expr:e {:
+            RESULT = Operator.create(sym.ASSIGN, Identifier.create(id), e);
+        :}
+    ;
+
+num_expr ::= num_expr:e1 PLUS num_expr:e2 {: RESULT = Operator.create(sym.PLUS, e1, e2); :}
+    | num_expr:e1 MINUS num_expr:e2 {: RESULT = Operator.create(sym.MINUS, e1, e2); :}
+    | num_expr:e1 TIMES num_expr:e2 {: RESULT = Operator.create(sym.TIMES, e1, e2); :}
+    | num_expr:e1 DIVIDE num_expr:e2 {: RESULT = Operator.create(sym.DIVIDE, e1, e2); :}
+    | num_expr:e1 MOD num_expr:e2 {: RESULT = Operator.create(sym.MOD, e1, e2); :}
+    | num_expr:e1 EXP num_expr:e2 {: RESULT = Operator.create(sym.EXP, e1, e2); :}
+    | NUMBER:n {: RESULT = Number.create(n); :}
+    | PI:n {: RESULT = Number.create(n); :}
+    | MINUS num_expr:e {: RESULT = Operator.create(sym.UMINUS, e);
+                   :} %prec UMINUS
+    | LPAREN num_expr:e RPAREN {: RESULT = e; :}
+    | SIN LPAREN num_expr:e RPAREN {: RESULT = Operator.create(sym.SIN, e); :}
+    | COS LPAREN num_expr:e RPAREN {: RESULT = Operator.create(sym.COS, e); :}
+    | ID:id {: RESULT = Identifier.create(id); :}
+    ;
+
+input_expr ::= READ LPAREN ID:id RPAREN {: RESULT = Operator.create(sym.READ,
+                                Identifier.create(id)); :}
+    ;
+
+output_expr ::= PRINT LPAREN num_expr:e RPAREN {: RESULT = Operator.create(sym.PRINT, e); :}
+    ;
