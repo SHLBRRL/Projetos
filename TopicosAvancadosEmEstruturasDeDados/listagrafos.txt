@@ -64,3 +64,5 @@ Não, pois para um grafo ser euleriano, todos seus vértices têm que ter grau p
 Sim, pois todos seus vértices são pares
 
 Um grafo simples com
+
+O teorema de Ore é atendido portanto o grafo é Hamiltoniano
