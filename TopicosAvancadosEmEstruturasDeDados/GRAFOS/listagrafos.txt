@@ -1,0 +1,125 @@
+V = {v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11}
+E = {e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15}
+Não há arestas paralelas pois não há mais de uma aresta ligando os mesmos 2 vértices
+Não, pois não há nenhum vértice de grau 0, ou seja, não há nenhum vértice que não é conectado por uma aresta
+N(v6) = {v5, v8, v9, v11}
+N(v9) = {v6, v8, v10, v11}
+Sim, pois não há arestas paralelas ou loops
+d(v1) = 2; d(v2) = 2; d(v3) = 3; d(v4) = 2;
+d(v5) = 3; d(v6) = 4; d(v7) = 2; d(v8) = 4;
+d(v9) = 4; d(v10) = 2; d(v11) = 2;
+2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4
+não, pois há vértices de graus diferentes
+sum(d(v[i])) = 2 * arestas
+75 = 2 * arestas
+arestas = 37.5
+este grafo não existe
+
+sum(d(v[i])) = 2 * arestas
+75 = 2 * arestas
+arestas = 37.5
+este grafo não existe
+
+sum(d(v[i])) = 2 * arestas
+30 = 2 * arestas
+arestas = 15
+pode haver este grafo
+
+A1 ∩ A2 = true
+A1 ∩ A3 = false
+A1 ∩ A4 = true
+A1 ∩ A5 = true
+A2 ∩ A3 = true
+A2 ∩ A4 = false
+A2 ∩ A5 = true
+A3 ∩ A4 = true
+A3 ∩ A5 = true 
+A4 ∩ A5 = true
+
+Não, pois uma das condições para dois grafos serem isomorfos é terem o mesmo número de vértices
+Não, pois uma das condições para dois grafos serem isomorfos é terem o mesmo número de arestas
+
+Apesar de G1 e G2 terem o mesmo número de vértices e arestas, G1 tem vértices de grau 3 e G2 não portanto não são isomorfos
+
+n*(n-1)/2
+7*(7-1)/2
+21
+
+n*(n-1)/2
+10*(10-1)/2
+45
+
+G é supegrafo de si mesmo
+
+G é subgrafo de si mesmo
+
+v1e1v2
+v1e1v2e1v1
+
+v1e1v2
+
+v2e2v3e4v2
+
+Não, pois para um grafo ser euleriano, todos seus vértices têm que ter grau par
+Sim, pois todos seus vértices são pares
+
+Um grafo simples com
+
+O teorema de Ore é atendido portanto o grafo é Hamiltoniano
+
+|V| = 8
+|E| = 8*(8-1)/2 = 28
+
+|V| = 9
+|E| = 18
+
+
+|V| = 5
+|E| = 5
+
+|V| = 2**5
+|E| = 2**(5-1)*5 = 80
+
+|V| = 4
+|E| = 2*(4-1) = 6
+
+|E| = (5 + 2 + 2 + 2 + 2 + 1) / 2 = 7
+
+
+|E| = (3 + 3 + 3 + 3 + 2) / 2 = 7
+
+|E| = (1 + 2 + 3 + 4 + 4) / 2 = 7
+
+|E| = (3 + 4 + 3 + 4 + 3) / 2 = 8.5
+este grafo não existe
+
+Para qualquer n natural, visto que os grafos completos todos os vértices têm o mesmo grau
+Para n = 4
+
+suficiente mas não necessário
+
+No grafo roda, o grau do vértice do centro é sempre n e o grau dos vértices no ciclo é sempre 3. Assim,
+o grafo roda Wn é regular apenas para n = 3. Observe que W3 é o mesmo que K4, ou seja, os grafos
+W3 e K4 são isomorfos
+
+O grafo ciclo Qn é regular para todos os valores de n ≥ 0, já que o grau de cada vértice é sempre n.
+Observe que Q0 é o grafo com um vértice.
+
+
+não é euleriano, visto que para um grafo ser euleriano, todos seus vértices tem que ter grau par
+
+visto que o grafo não é aceito pelo teorema de Bondy, pelo teorema de Ore e pelo teorema de Dirac não se pode dizer nada se o grafo é Hamiltoniano ou não
+
+se um problema é NP-Completo, isto quer dizer que este problema não tem soluções polinomiais, somente exponenciais.
+se um problema tem complexidade P, ele tem soluções de complexidade polinomiais
+
+Um vértice: existem três subgrafos com um vértice e, consequentemente, nenhuma aresta; 
+Dois vértices: existem C(3, 2) = 3 possibilidades de escolher subgrafos com dois vértices (de um conjunto com três vértices, devemos escolher dois). Para cada possibilidade, podemos incluir ou não a aresta, i.e., 3 × 2 = 6 subgrafos com dois vértices; 
+Três vértices: neste caso, para uma das três arestas que podemos ter, podemos incluí-la ou não, ou seja, para cada aresta temos duas possibilidades. Assim, temos 2×2×2 = 8 possibilidades. Uma outra forma de analisarmos este caso é que temos um conjunto E com três arestas. O conjunto potência de E nos dá todos os subconjuntos de aresta que podemos escolher. Assim, temos 2 3 = 8 possibilidades de subconjuntos distintos. Assim, a quantidade total de subgrafos com pelo menos um vértice é a soma de 3 + 6 + 8 = 17.
+
+
+Segundo Berge, se conseguirmos encontrar um caminho que comece e termine com vértices livres alternando entre arestas que pertencem e não pertencem ao emparelhamento, então existe um emparelhamento M’ maior que o inicial. Esse tipo de caminho chama-se Caminho M-aumentante, utilizando-se esse teorema é possível solucionar o problema de emparelhamento
+
+O teorema de Hall demonstra que, em um grafo bipartido com partição (X,Y), existe um emparelhamento se e somente se o tamanho do conjunto vizinhança de s for maior igual o tamanho de s, para todo subconjunto S de X, a importância desse teorema é a possibilidade de determinar se um grafo bipartido contém um emparelhamento completo.
+
+Para todo n >= 3, já que o grau de cada vértice é sempre 2
