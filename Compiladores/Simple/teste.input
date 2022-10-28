@@ -1,0 +1,10 @@
+read(a);
+read(b);
+
+if not b == 2 and a==5 then
+{
+    print(a + b);
+} else
+{
+    print(a - b);
+}
