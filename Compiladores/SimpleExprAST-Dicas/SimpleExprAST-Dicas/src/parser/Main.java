@@ -1,8 +1,11 @@
 /*
-    Para executar o interpretador na linha de comando (fora do IDE):
-        java -jar simple-expr-ast.jar
-        ou
-        java -jar simple-expr-ast.jar <nome do arquivo de entrada>
+
+    Guilherme de Campos - RA: 20.00089-8
+
+    Luis Guilherme de Souza Munhoz - RA: 20.01937-8
+
+    Enrico Giannobile - RA: 19.00610-0
+
  */
 package parser;
 
