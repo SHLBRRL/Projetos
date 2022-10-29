@@ -30,7 +30,7 @@ public class Interpreter {
                 CondOperator op = (CondOperator) ast;
                 // daí obter a expressão relacional
                 AST relExp = op.getRelStmt();
-            if (op.getOperatorSymbol() == sym.WHILE){
+            if (op.getOperatorSymbol() == sym.IF){
                 // interpretar esta expressão
                 interpret(relExp);
                 // neste caso, deve-se verificar qual o valor booleano
@@ -44,7 +44,18 @@ public class Interpreter {
                     interpret(ast.getRightAST());
                 }
             } else if (op.getOperatorSymbol() == sym.WHILE){
-                
+                // interpretar esta expressão
+                interpret(relExp);
+                // neste caso, deve-se verificar qual o valor booleano
+                // retornado pela condição do operador
+                Boolean b = (Boolean) relExp.getValue();
+                // de acordo com o valor da expressão, interpretar o
+                // lado esquerdo (if) ou direito (else), se existir
+                while (b == true) {
+                    interpret(ast.getLeftAST());
+                    interpret(relExp);
+                    b = (Boolean) relExp.getValue();
+                }
             }
             } else { // comandos sequenciais
                 // processar a AST esquerda

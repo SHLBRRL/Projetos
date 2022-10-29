@@ -1,10 +1,7 @@
 read(a);
 read(b);
 
-if not b == 2 and a==5 then
-{
-    print(a + b);
-} else
-{
-    print(a - b);
+while(b <= 10){
+    print(b);
+    b = b + 1;
 }

@@ -218,6 +218,6 @@ relational_stmt ::= numerical_stmt:n1 EQ numerical_stmt:n2
     |  NOT relational_stmt:r1
         {: RESULT = Operator.create( sym.NOT, r1 ); :}
     | LPAREN relational_stmt:r1 RPAREN
-        {: RESULT = Operator.create( sym.NOT, r1 ); :}
+        {: RESULT = r1; :}
     ;
 
